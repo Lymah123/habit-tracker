@@ -1,0 +1,104 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f8f9fa; /* Bootstrap light gray background */
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+h1 {
+  color: #007bff; /* Bootstrap primary color */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 300px;
+  margin-right: 10px;
+  border: 1px solid #ced4da; /* Bootstrap border color */
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff; /* Bootstrap primary color */
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker shade for hover effect */
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 10px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #dee2e6; /* Bootstrap border color */
+}
+
+li.dark-mode {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+  color: #28a745; /* Bootstrap success color */
+}
+
+a:hover {
+  color: #218838; /* Darker shade for hover effect */
+}
+
+span {
+  color: #28a745; /* Bootstrap success color */
+}
+
+.badge-success {
+  background-color: #28a745;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.dark-mode .list-group-item {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.dark-mode .btn-primary {
+  background-color: #1a73e8;
+  border-color: #1a73e8;
+}
+
+.dark-mode .btn-success {
+  background-color: #34a853;
+  border-color: #34a853;
+}
+
+.dark-mode .badge-success {
+  background-color: #34a853;
+}

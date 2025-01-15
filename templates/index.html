@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4 text-center">Habit Tracker</h1>
+        <button id="darkModeToggle" class="btn btn-secondary mb-4">Toggle Dark Mode</button>
+        <form action="{{ url_for('add_habit') }}" method="POST" class="form-inline justify-content-center mb-4">
+            <input type="text" name="habit" class="form-control mr-2" placeholder="New Habit">
+            <input type="text" name="category" class="form-control mr-2" placeholder="Category">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+        <ul class="list-group mb-4">
+            {% for habit in habits %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ habit.name }} - Streak: {{ habit.streak }} - Category: {{ habit.category }}
+                    {% if not habit.completed %}
+                        <a href="{{ url_for('complete_habit', habit_id=habit.id) }}" class="btn btn-success btn-sm">Mark as Done</a>
+                    {% else %}
+                        <span class="badge badge-success">Completed</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        <canvas id="habitChart" width="400" height="200"></canvas>
+    </div>
+    <script>
+        var ctx = document.getElementById('habitChart').getContext('2d');
+        var habitChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: JSON.parse('{{ dates | tojson | safe }}'),
+                datasets: [{
+                    label: 'Habit Completion',
+                    data: JSON.parse('{{ completions | tojson | safe }}'),
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Dark mode toggle
+        document.getElementById('darkModeToggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            var listItems = document.querySelectorAll('.list-group-item');
+            listItems.forEach(function(item) {
+                item.classList.toggle('dark-mode');
+            });
+        });
+    </script>
+</body>
+</html>
